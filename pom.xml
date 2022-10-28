@@ -41,6 +41,7 @@
     </dependencies>
 
     <build>
+        <finalName>springframework-${project.version}-${env}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -55,7 +56,47 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources-${env}</directory>
+            </resource>
+        </resources>
     </build>
 
+    <profiles>
+        <!--Local Profile-->
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>local</env>
+                <executable>true</executable>
+                <spring.profiles.active>local</spring.profiles.active>
+            </properties>
+        </profile>
+        <!--운영서버 Profile-->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+                <executable>true</executable>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
+        </profile>
+        <!--개발서버 Profile-->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+                <executable>true</executable>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
