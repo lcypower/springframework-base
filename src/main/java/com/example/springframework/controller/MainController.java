@@ -1,19 +1,25 @@
 package com.example.springframework.controller;
 
 import com.example.springframework.dto.MainDTO;
+import com.example.springframework.service.MainService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Controller
 @RequestMapping("/api/main")
+@RequiredArgsConstructor
 public class MainController {
+
+    private final MainService mainService;
 
     @GetMapping("/get-all")
     public ResponseEntity<Object> getMainAll(@ModelAttribute MainDTO.mainRequest param){
-        return new ResponseEntity(param, HttpStatus.OK);
+        MainDTO.mainResponse response = this.mainService.getParam(param);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @GetMapping("/get-param")
