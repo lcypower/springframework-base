@@ -18,6 +18,7 @@ public class MainController {
 
     @GetMapping("/get-all")
     public ResponseEntity<Object> getMainAll(@ModelAttribute MainDTO.mainRequest param){
+        System.out.println("Controller in~");
         MainDTO.mainResponse response = this.mainService.getParam(param);
         return ResponseEntity.ok(response);
     }
