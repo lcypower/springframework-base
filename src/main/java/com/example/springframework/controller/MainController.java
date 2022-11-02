@@ -1,6 +1,8 @@
 package com.example.springframework.controller;
 
 import com.example.springframework.dto.MainDTO;
+import com.example.springframework.exception.CustomException;
+import com.example.springframework.exception.Errors;
 import com.example.springframework.service.MainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,11 +27,13 @@ public class MainController {
 
     @GetMapping("/get-param")
     public ResponseEntity<Object> getMainParam(@RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("level") int level){
-        MainDTO.mainResponse param = new MainDTO.mainResponse();
-        param.setId(id);
-        param.setName(name);
-        param.setLevel(level);
-        return new ResponseEntity(param, HttpStatus.OK);
+        // 강제로 Exception 발생!
+        throw new CustomException(Errors.INTERNAL_SERVER_ERROR);
+//        MainDTO.mainResponse param = new MainDTO.mainResponse();
+//        param.setId(id);
+//        param.setName(name);
+//        param.setLevel(level);
+//        return new ResponseEntity(param, HttpStatus.OK);
     }
 
     @GetMapping("/get-path/{pathvalue}")
