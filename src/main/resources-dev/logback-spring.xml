@@ -13,11 +13,8 @@
     <appender name="ServiceFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!-- 로그 파일 경로 및 파일명 -->
             <fileNamePattern>${filePath}/service.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!-- 용량 제한 -->
             <maxFileSize>10MB</maxFileSize>
-            <!--  365일 지난 파일 삭제 -->
             <maxHistory>365</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -29,11 +26,8 @@
     <appender name="AccessFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!-- 로그 파일 경로 및 파일명 -->
             <fileNamePattern>${filePath}/access.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!-- 용량 제한 -->
             <maxFileSize>10MB</maxFileSize>
-            <!--  365일 지난 파일 삭제 -->
             <maxHistory>365</maxHistory>
         </rollingPolicy>
         <encoder>
