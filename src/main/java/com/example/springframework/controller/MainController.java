@@ -5,6 +5,7 @@ import com.example.springframework.exception.CustomException;
 import com.example.springframework.exception.Errors;
 import com.example.springframework.service.MainService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,14 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/main")
 @RequiredArgsConstructor
+@Slf4j
 public class MainController {
 
     private final MainService mainService;
 
     @GetMapping("/get-all")
     public ResponseEntity<Object> getMainAll(@ModelAttribute MainDTO.mainRequest param){
-        System.out.println("Controller in~");
+        log.info("Controller in~");
         MainDTO.mainResponse response = this.mainService.getParam(param);
         return ResponseEntity.ok(response);
     }

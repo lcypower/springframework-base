@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="filePath" value="/apps/spring-base/logs" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ServiceFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 로그 파일 경로 및 파일명 -->
+            <fileNamePattern>${filePath}/service.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 용량 제한 -->
+            <maxFileSize>10MB</maxFileSize>
+            <!--  365일 지난 파일 삭제 -->
+            <maxHistory>365</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="AccessFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 로그 파일 경로 및 파일명 -->
+            <fileNamePattern>${filePath}/access.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 용량 제한 -->
+            <maxFileSize>10MB</maxFileSize>
+            <!--  365일 지난 파일 삭제 -->
+            <maxHistory>365</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger level="info" name="com.example.springframework.service" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+    <logger level="info" name="com.example.springframework.config.filter.LogFilter" additivity="false">
+        <appender-ref ref="AccessFile"/>
+    </logger>
+    <logger level="info" name="com.example.springframework.service" additivity="false">
+        <appender-ref ref="ServiceFile"/>
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>

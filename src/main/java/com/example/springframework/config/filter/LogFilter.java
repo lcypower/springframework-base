@@ -21,9 +21,9 @@ public class LogFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         long start = new Date().getTime();
-        System.out.println("LogFilter : " + request.getRequestURI() + " start " + new Date());
+        log.info("LogFilter : " + request.getRequestURI() + " start " + new Date());
         filterChain.doFilter(request, response);
         long endTime = new Date().getTime() - start;
-        System.out.println("LogFilter : " + request.getRequestURI() + " " + endTime + "(m/s) end");
+        log.info("LogFilter : " + request.getRequestURI() + " " + endTime + "(m/s) end");
     }
 }

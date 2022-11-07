@@ -1,5 +1,6 @@
 package com.example.springframework.config.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -14,6 +15,7 @@ import java.io.IOException;
 @Component
 @WebFilter(filterName = "CORSFilter")
 @Order(1)
+@Slf4j
 public class CORSFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -26,9 +28,9 @@ public class CORSFilter extends OncePerRequestFilter {
             response.flushBuffer();
         } else {
             response.setHeader("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-PaymentType, Content-Disposition, Accept");
-            System.out.println("CORSFilter in~");
+            log.info("CORSFilter in~");
             filterChain.doFilter(request, response);
-            System.out.println("CORSFilter out~");
+            log.info("CORSFilter out~");
         }
     }
 }
